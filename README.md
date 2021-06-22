@@ -6,15 +6,16 @@ Getting Started with  a folder called WebMall
 This project was bootstrapped with the application called WebMall
 
 Available Scripts:
-In the project terminal,first you can create a virtual environment:
+
+* In the project terminal,first you can create a virtual environment:
                virtualenv -p python3.6 esite
-then you can activate using:
+* Then you can activate the environment using:
                source esite/bin/activate
-Install all dependencies:
+* Install all dependencies:
                pip install -r requirements.txt 
-Apply database migrations:
+* Apply database migrations:
                python manage.py migrate
-last you can run:
+* Run the application:
                python manage.py runserver
 
 
