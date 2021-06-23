@@ -42,7 +42,7 @@ def mobile(request, data=None):
         mobiles = Product.objects.filter(category='M').filter(selling_price__lte=10000)
     elif data == 'above':
         mobiles = Product.objects.filter(category='M').filter(selling_price__gte=10000)
-    return render(request, 'app/mobile.html', {'mobiles': mobiles})
+    return render(request, 'app/product_list.html', {'mobiles': mobiles})
 
 def checkout(request):
     return render(request, 'app/check_out.html')
