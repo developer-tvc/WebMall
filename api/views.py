@@ -8,8 +8,8 @@ from knox.models import AuthToken
 from knox.views import LoginView as KnoxLoginView
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from .serializers import ProductSerializer, UserSerializer, RegisterSerializer, ChangePasswordSerializer
 from product.models import Product
+from .serializers import ProductSerializer, UserSerializer, RegisterSerializer, ChangePasswordSerializer
 
 
 class RegisterAPI(generics.GenericAPIView):
@@ -46,6 +46,7 @@ class ProductSerializerView(APIView):
     """
     product viewapi
     """
+
     def get(self, request):
         queryset = Product.objects.all()
         serializer = ProductSerializer(queryset, many=True)
@@ -85,5 +86,3 @@ class ChangePasswordView(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-

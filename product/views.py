@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
-from.helper import send_mail_without_celery
+from .helper import send_mail_without_celery
 from .models import Product
 
 
 class ProductView(View):
     def get(self, request):
-        send_mail_without_celery()
+        # send_mail_without_celery()
         sarees = Product.objects.filter(category='S')
         casual_shirt = Product.objects.filter(category='C')
         mobiles = Product.objects.filter(category='M')
@@ -26,8 +26,10 @@ class ProductDetailView(View):
 def add_to_cart(request):
     return render(request, 'app/add_to_cart.html')
 
+
 def buy_now(request):
     return render(request, 'app/buy_now.html')
+
 
 def orders(request):
     return render(request, 'app/orders.html')
@@ -43,6 +45,7 @@ def mobile(request, data=None):
     elif data == 'above':
         mobiles = Product.objects.filter(category='M').filter(selling_price__gte=10000)
     return render(request, 'app/product_list.html', {'mobiles': mobiles})
+
 
 def checkout(request):
     return render(request, 'app/check_out.html')
@@ -61,6 +64,3 @@ def auto_suggest(request):
     list = []
     list += [x.title for x in queryset]
     return JsonResponse(list, safe=False)
-
-
-

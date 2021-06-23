@@ -41,6 +41,6 @@ urlpatterns = [
          auth_views.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html',form_class=MySetPasswordForm),
          name='password_reset_confirm'),
     path('password-reset-complete/',
-         auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_confirm.html'),
-         name='password_reset_confirm'),
+         auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'),
+         name='password_reset_complete'),
 ]

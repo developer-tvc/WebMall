@@ -3,11 +3,14 @@ from django.views import View
 from django.contrib import messages
 from .forms import CustomerRegistrationForm
 
+
 def profile(request):
     return render(request, 'app/profile.html')
 
+
 def address(request):
     return render(request, 'app/address.html')
+
 
 class CustomerRegistrationView(View):
     def get(self, request):
@@ -20,9 +23,5 @@ class CustomerRegistrationView(View):
             messages.success(request, 'Registered successfully')
             form.save()
         return render(request, 'app/home.html')
-
-
-
-
 
 # Create your views here.
