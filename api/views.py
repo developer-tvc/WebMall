@@ -42,7 +42,7 @@ class LoginAPI(KnoxLoginView):
         return super(LoginAPI, self).post(request, format=None)
 
 
-class ProductSerialView(APIView):
+class ProductSerializerView(APIView):
     """
     product viewapi
     """
