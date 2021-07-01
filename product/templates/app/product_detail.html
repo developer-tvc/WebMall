@@ -14,7 +14,7 @@
             <h4>Rs.{{ product.discounted_price }} <small class="fw-light text-decoration-line-through">
                 {{ product.selling_price}}</small></h4> <br>
 
-            <form action ="/add-to-cart" class="d-inline">
+            <form action ="{% url 'cart:add-to-cart'%}" class="d-inline">
                 <input type = "hidden" name = "prod_id" value = {{product.id}} id="prod_id">
                 <button type = "submit" class = "btn btn-primary shadow px-5 pu-2">Add to cart</button>
             </form>

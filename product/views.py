@@ -3,7 +3,8 @@ from django.views import View
 from django.http import JsonResponse
 from .helper import send_mail_without_celery
 from .models import Product
-
+from customer.models import Customer
+from cart.models import Cart
 
 class ProductView(View):
     def get(self, request):
@@ -46,7 +47,19 @@ def mobile(request, data=None):
 
 
 def checkout(request):
-    return render(request, 'app/check_out.html')
+    user = request.user
+    add = Customer.objects.filter(user=user)
+    cart_items = Cart.objects.filter(user =user)
+    amount =0.0
+    shipping_amount=70.0
+    total_amount =0.0
+    cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+    if cart_product:
+        for p in cart_product:
+            temp_amount = (p.quantity * p.product.discounted_price)
+            amount += temp_amount
+            total_amount = amount + shipping_amount
+    return render(request, 'app/check_out.html',{'add':add,'total_amount':total_amount,'cart_items':cart_items})
 
 
 def search_page(request):
