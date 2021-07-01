@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'knox',
     'rest_framework',
     'django_rest_passwordreset',
+    'cart',
 ]
 
 MIDDLEWARE = [

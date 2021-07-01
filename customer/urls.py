@@ -20,7 +20,7 @@ from .forms import LoginForm, MyPasswordChangeForm,MyPasswordResetForm,MySetPass
 
 urlpatterns = [
     path('', views.CustomerRegistrationView.as_view(), name='customerregistration'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
     path('password-reset/',auth_views.PasswordResetView.as_view(template_name='app/password_reset.html',form_class=MyPasswordResetForm),name ='password_reset'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm),
@@ -43,4 +43,6 @@ urlpatterns = [
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('activate/<uidb64>/<token>/',views.activate, name='activate'),
+    path('signup/', views.signup, name="signup"),
 ]

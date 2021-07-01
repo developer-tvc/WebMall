@@ -23,8 +23,6 @@ class ProductDetailView(View):
         return render(request, 'app/product_detail.html', {'product': product})
 
 
-def add_to_cart(request):
-    return render(request, 'app/add_to_cart.html')
 
 
 def buy_now(request):
@@ -64,3 +62,5 @@ def auto_suggest(request):
     list = []
     list += [x.title for x in queryset]
     return JsonResponse(list, safe=False)
+
+
