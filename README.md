@@ -1,4 +1,4 @@
-# WebMall
+# WebMall - Application
 
 This is a django shopping Website.
 
