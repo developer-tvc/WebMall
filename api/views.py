@@ -8,15 +8,20 @@ from knox.models import AuthToken
 from knox.views import LoginView as KnoxLoginView
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.decorators import method_decorator
+from ratelimit.decorators import ratelimit
 from .serializers import ProductSerializer, UserSerializer, RegisterSerializer, ChangePasswordSerializer
 from product.models import Product
 
 
+@method_decorator(ratelimit(key='ip', rate='5/m', method='POST', block=True), name='dispatch')
 class RegisterAPI(generics.GenericAPIView):
     """
     Register API
     """
     serializer_class = RegisterSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -28,6 +33,7 @@ class RegisterAPI(generics.GenericAPIView):
         })
 
 
+@method_decorator(ratelimit(key='ip', rate='5/m', method='POST', block=True), name='dispatch')
 class LoginAPI(KnoxLoginView):
     """
     LoginApi
@@ -39,6 +45,8 @@ class LoginAPI(KnoxLoginView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
+        # Regenerate session ID to prevent session fixation attacks
+        request.session.cycle_key()
         return super(LoginAPI, self).post(request, format=None)
 
 

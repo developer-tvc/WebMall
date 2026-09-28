@@ -26,7 +26,7 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm),
          name='login'),
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', views.SafeLogoutView.as_view(), name='logout'),
     path('password-change/',
          auth_views.PasswordChangeView.as_view(template_name='app/password_change.html',
                                                form_class=MyPasswordChangeForm,
@@ -41,6 +41,6 @@ urlpatterns = [
          auth_views.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html',form_class=MySetPasswordForm),
          name='password_reset_confirm'),
     path('password-reset-complete/',
-         auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_confirm.html'),
+         auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_done.html'),
          name='password_reset_confirm'),
 ]
